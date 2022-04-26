@@ -822,26 +822,22 @@ namespace ABTCar {
             switch (direction) {
                 case Electricdirection.forword: {
                     pins.analogWritePin(AnalogPin.P13, 1023);
-                    pins.analogWritePin(AnalogPin.P14, 0);
                 }; break;
                 case Electricdirection.back: {
-                    pins.analogWritePin(AnalogPin.P13, 0);
                     pins.analogWritePin(AnalogPin.P14, 1023);
                 }; break;
                 case Electricdirection.stop: {
-                    pins.analogWritePin(AnalogPin.P15, 0);
-                    pins.analogWritePin(AnalogPin.P16, 0);
+                    pins.analogWritePin(AnalogPin.P13, 0);
+                    pins.analogWritePin(AnalogPin.P14, 0);
                 }; break;
             }
         } else if (onec == Electricmachinery.right) {
             switch (direction) {
                 case Electricdirection.forword: {
-                    pins.analogWritePin(AnalogPin.P15, 0);
                     pins.analogWritePin(AnalogPin.P16, 1023);
                 }; break;
                 case Electricdirection.back: {
                     pins.analogWritePin(AnalogPin.P15, 1023);
-                    pins.analogWritePin(AnalogPin.P16, 0);
                 }; break;
                 case Electricdirection.stop: {
                     pins.analogWritePin(AnalogPin.P15, 0);
@@ -851,17 +847,13 @@ namespace ABTCar {
         } else if (onec == Electricmachinery.all) {
             switch (direction) {
                 case Electricdirection.forword: {
-                    pins.analogWritePin(AnalogPin.P15, 0);
                     pins.analogWritePin(AnalogPin.P16, 1023);
                     pins.analogWritePin(AnalogPin.P13, 1023);
-                    pins.analogWritePin(AnalogPin.P14, 0);
-                }; break;
+                }; 
                 case Electricdirection.back: {
-                    pins.analogWritePin(AnalogPin.P13, 0);
                     pins.analogWritePin(AnalogPin.P14, 1023);
                     pins.analogWritePin(AnalogPin.P15, 1023);
-                    pins.analogWritePin(AnalogPin.P16, 0);
-                }; break;
+                }; 
                 case Electricdirection.stop: {
                     pins.analogWritePin(AnalogPin.P13, 0);
                     pins.analogWritePin(AnalogPin.P14, 0);
@@ -886,22 +878,18 @@ namespace ABTCar {
             switch (direction1) {
                 case Electricdirection.forword: {
                     pins.analogWritePin(AnalogPin.P13, Math.map(value, 0, 255, 0, 1023));
-                    pins.analogWritePin(AnalogPin.P14, 0);
                 }; break;
                 case Electricdirection.back: {
-                    pins.analogWritePin(AnalogPin.P13, 0);
                     pins.analogWritePin(AnalogPin.P14, Math.map(value, 0, 255, 0, 1023));
                 }; break;
             }
         } else if (onec1 == Electricmachinery.right) {
             switch (direction1) {
                 case Electricdirection.forword: {
-                    pins.analogWritePin(AnalogPin.P15, 0);
                     pins.analogWritePin(AnalogPin.P16, Math.map(value, 0, 255, 0, 1023));
                 }; break;
                 case Electricdirection.back: {
                     pins.analogWritePin(AnalogPin.P15, Math.map(value, 0, 255, 0, 1023));
-                    pins.analogWritePin(AnalogPin.P16, 0);
                 }; break;
             }
         } else if (onec1 == Electricmachinery.all) {
