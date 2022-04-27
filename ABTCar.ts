@@ -69,7 +69,7 @@ namespace ABTCar {
     /**
      * 播放音乐
      */
-    //% blockId=ABT_Music block="播放音乐：|%index|"
+    //% blockId=ABT_Music1 block="播放音乐：|%index|"
     //% weight=96
     //% blockGap=8
     //% group="音乐"
