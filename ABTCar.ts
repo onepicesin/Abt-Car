@@ -41,10 +41,6 @@ namespace ABTCar {
         //% blockId="ringtone" block="ringtone"
         ringtone,
         //% blockId="funk" block="funk"
-        funk,
-        //% blockId="blues" block="blues"
-        blues,
-        //% blockId="birthday" block="birthday"
         birthday,
         //% blockId="wedding" block="wedding"
         wedding,
@@ -87,8 +83,6 @@ namespace ABTCar {
             case ABTMusic.ode: music.beginMelody(music.builtInMelody(Melodies.Ode), MelodyOptions.Once); break;
             case ABTMusic.nyan: music.beginMelody(music.builtInMelody(Melodies.Nyan), MelodyOptions.Once); break;
             case ABTMusic.ringtone: music.beginMelody(music.builtInMelody(Melodies.Ringtone), MelodyOptions.Once); break;
-            case ABTMusic.funk: music.beginMelody(music.builtInMelody(Melodies.Funk), MelodyOptions.Once); break;
-            case ABTMusic.blues: music.beginMelody(music.builtInMelody(Melodies.Blues), MelodyOptions.Once); break;
             case ABTMusic.wedding: music.beginMelody(music.builtInMelody(Melodies.Wedding), MelodyOptions.Once); break;
             case ABTMusic.funereal: music.beginMelody(music.builtInMelody(Melodies.Funeral), MelodyOptions.Once); break;
             case ABTMusic.punchline: music.beginMelody(music.builtInMelody(Melodies.Punchline), MelodyOptions.Once); break;
@@ -105,17 +99,17 @@ namespace ABTCar {
   
     //传感器
     export enum ABTsensor {
-        //% blockId="MicroSeconds" block="微秒"
-        MicroSeconds = 0,
         //% blockId="Centimeters" block="厘米"
-        Centimeters,
+        Centimeters = 0,
+        //% blockId="MicroSeconds" block="微秒"
+        MicroSeconds,
         //% blockId="inches" block="英寸"
         Inches
     }
      /**
      * 超声波传感器
      */
-    //% blockId=ABT_ping block="超声波发送引脚： %sendout|接收引脚： %receive|返回单位： %distanceunit"
+    //% blockId=ABT_ping2 block="超声波接收引脚： %sendout|发送引脚： %receive|返回单位： %distanceunit"
     //% weight=5
     //% blockGap=8
     //% color="#ee0e3d"
@@ -162,7 +156,7 @@ namespace ABTCar {
     /**
      * 判断是否按键按下
      */
-    //% blockId=ABT_Button block="按键|： %key|正在被： %value"
+    //% blockId=ABT_Button block="按键|： %key|状态： %value"
     //% weight=5
     //% blockGap=8
     //% color="#ee0e3d"
@@ -220,7 +214,7 @@ namespace ABTCar {
     //% blockGap=8
     //% color="#ee0e3d"
     //% group="摇杆手柄"
-    //% block="当按键： %key| 的状态是： %keyEvent"
+    //% block="按键： %key| 状态： %keyEvent"
     export function OnKey1(key: ABT_Key2, keyEvent: ABT_KeyState2, handler: Action) {
         if (!posi_init) {
             InitialPosition();
@@ -236,7 +230,7 @@ namespace ABTCar {
     //% blockGap=8
     //% color="#ee0e3d"
     //% group="摇杆手柄"
-    //% block="按键 %key| 正被按下"
+    //% block="按键 %key| 按下"
     export function KeyPressed1(key: ABT_Key2): boolean {
         const pin = <DigitalPin><number>key;
         pins.setPull(pin, PinPullMode.PullUp);
@@ -351,48 +345,7 @@ namespace ABTCar {
             pins.digitalWritePin(DigitalPin.P8, 0);
         }
     }
-     /**
-     * 判断是否按键按下
-     */
-    //% blockId=ABT_Input_Button block="按键|引脚： %pin|状态： %value"
-    //% weight=5
-    //% blockGap=8
-    //% color="#ee0e3d"
-    //% group="摇杆手柄"
-    export function Button2(pin: DigitalPin, value: ABT_KeyState): boolean {
-        pins.setPull(pin, PinPullMode.PullUp);
-        return pins.digitalReadPin(pin) == value;
-    }
-  
-  
-    //电机
-    /**
-     * 直流电机 控制电机速度0~1024
-     */
-    //% blockId=ABT_MotorRun block="发动机引脚：|%pin|速度： %speed"
-     //% weight=5
-    //% blockGap=8
-    //% color="#ee0e3d"
-    //% speed.min=0 speed.max=1023
-    //% group="电机"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
-    export function MotorRun(pin: AnalogPin, speed: number): void {
-        pins.analogWritePin(pin, speed);
-    }
-    /**
-     * 控制电机停止
-     */
-    //% blockId=ABT_MotorStop block="需要停止的电机 |引脚： %pin"
-    //% weight=5
-    //% blockGap=8
-    //% color="#ee0e3d"
-    //% group="电机"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
-    export function MotorStop(pin: AnalogPin): void {
-        pins.analogWritePin(pin, 0);
-    }
-  
-  
+
     //小车控制
     export enum ABTLinesensor {
         //% block="白线"
@@ -803,7 +756,7 @@ namespace ABTCar {
     export enum Electricdirection {
         //%block="正转"
         forword = 0,
-        //%block="返转"
+        //%block="反转"
         back,
         //%block="停止"
         stop
