@@ -156,7 +156,7 @@ namespace ABTCar {
     /**
      * 判断是否按键按下
      */
-    //% blockId=ABT_Button block="按键|： %key|状态： %value"
+    //% blockId=ABT_Button block="手柄按键|： %key|状态： %value"
     //% weight=5
     //% blockGap=8
     //% color="#ee0e3d"
@@ -188,9 +188,7 @@ namespace ABTCar {
         key_R1 = DAL.MICROBIT_ID_IO_P16,
     }
     export enum ABT_KeyState2 {
-        //% blockId="click" block="点击"
-        click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-        //% blockId="pressed" block="摁下"
+        //% blockId="pressed" block="按下"
         pressed = DAL.MICROBIT_BUTTON_EVT_DOWN,
         //% blockId="released" block="松开"
         released = DAL.MICROBIT_BUTTON_EVT_UP,
@@ -214,7 +212,7 @@ namespace ABTCar {
     //% blockGap=8
     //% color="#ee0e3d"
     //% group="摇杆手柄"
-    //% block="按键： %key| 状态： %keyEvent"
+    //% block="手柄按键： %key| 状态： %keyEvent"
     export function OnKey1(key: ABT_Key2, keyEvent: ABT_KeyState2, handler: Action) {
         if (!posi_init) {
             InitialPosition();
@@ -222,20 +220,7 @@ namespace ABTCar {
         init();
         control.onEvent(<number>key, <number>keyEvent, handler); // register handler
     }
-     /**
-     * 判断是否按键按下
-     */
-    //% blockId=ABT_KeyPressed1
-    //% weight=5
-    //% blockGap=8
-    //% color="#ee0e3d"
-    //% group="摇杆手柄"
-    //% block="按键 %key| 按下"
-    export function KeyPressed1(key: ABT_Key2): boolean {
-        const pin = <DigitalPin><number>key;
-        pins.setPull(pin, PinPullMode.PullUp);
-        return pins.digitalReadPin(<DigitalPin><number>key) == 0;
-    }
+
   
     export enum ABTHandle {
         //% blockId="UpLeft" block="左上"
