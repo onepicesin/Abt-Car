@@ -387,38 +387,22 @@ namespace ABTCar {
         }
         return temp;
     }
-    //% blockId=shunxian
-    //% block="小车以|%speed1速度沿黑线巡线"
+    //% blockId=xunxian
+    //% block="小车沿黑线固定巡线"
     //% weight=5
     //% blockGap=8
     //% color="#ee0e3d"
-     //%speed1.min=0 speed1.max=255
     //% group="小车运动控制"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function xunxian(speed1:number):void{
-        if (LineSensor1(ABTKeyState.leftstate, ABTLinesensor.white) && LineSensor1(ABTKeyState.rightstate, ABTLinesensor.black)) {
-            pins.analogWritePin(L_backward, 0);
-            pins.analogWritePin(L_forward, Math.map(speed1, 0, 255, 0, 1023));
-            pins.analogWritePin(R_backward, 0);
-            pins.analogWritePin(R_forward, 0);
-        }
-        if (LineSensor1(ABTKeyState.leftstate, ABTLinesensor.black) && LineSensor1(ABTKeyState.rightstate, ABTLinesensor.white)) {
-            pins.analogWritePin(L_backward, 0);
-            pins.analogWritePin(L_forward, 0);
-            pins.analogWritePin(R_backward, 0);
-            pins.analogWritePin(R_forward, Math.map(speed1, 0, 255, 0, 1023));
-        }
-        if (LineSensor1(ABTKeyState.leftstate, ABTLinesensor.black) && LineSensor1(ABTKeyState.rightstate, ABTLinesensor.black)) {
-            pins.analogWritePin(L_backward, 0);
-                pins.analogWritePin(L_forward, Math.map(speed1, 0, 255, 0, 1023));
-                pins.analogWritePin(R_backward, 0);
-                pins.analogWritePin(R_forward, Math.map(speed1, 0, 255, 0, 1023));
-        }
-        if (LineSensor1(ABTKeyState.leftstate, ABTLinesensor.white) && LineSensor1(ABTKeyState.rightstate, ABTLinesensor.white)) {
-            pins.analogWritePin(L_backward, 0);
-                pins.analogWritePin(L_forward, 0);
-                pins.analogWritePin(R_backward, 0);
-                pins.analogWritePin(R_forward, 0);
+    export function xunxian():void{
+        if (LineSensor(ABTKeyState.leftstate, ABTLinesensor.white)) {
+            ABTCar3(Electricmachinery.left, Electricdirection.forword, 150)
+            ABTCar3(Electricmachinery.right, Electricdirection.forword, 10)
+        } else if (LineSensor(ABTKeyState.rightstate, ABTLinesensor.white)) {
+            ABTCar3(Electricmachinery.right, Electricdirection.forword, 150)
+            ABTCar3(Electricmachinery.left, Electricdirection.forword, 10)
+        } else {
+            ABTCar3(Electricmachinery.all, Electricdirection.forword, 120)
         }
     }
     /**
