@@ -1,7 +1,7 @@
 {
-    "name": "M_Car",
+    "name": "ABTCar",
     "version": "0.0.1",
-    "description": "M_Car",
+    "description": "ABTCar",
     "license": "MIT",
     "dependencies": {
         "core": "*",
